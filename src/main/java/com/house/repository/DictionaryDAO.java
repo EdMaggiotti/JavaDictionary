@@ -10,7 +10,6 @@ import com.house.domain.Word;
 
 public interface DictionaryDAO extends Serializable {
 
-
 	List<Word> getWords();
 
 	Word getById(long id);
