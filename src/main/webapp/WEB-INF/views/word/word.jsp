@@ -6,7 +6,7 @@
 
 
 <!-- *************************************************************** -->
-<c:forEach items="${words}" var="w">
+ <c:forEach items="${words}" var="w">
 	<a href="word/detalle/${w.id}"> <c:out value="${w.word}" /> <i>---
 			<c:out value="${w.meaning}" />
 	</i>
@@ -14,16 +14,16 @@
 	<a href="word/eliminar/${w.id}"> [X] </a>
 	<br>
 	<br>
-</c:forEach>
+</c:forEach> 
 
 <!-- Probando el search -->
 
-<form:form action="dictionary/buscar" method="get" commandName="searchItemForm">
+ <form:form action="dictionary/buscar" method="get" commandName="searchItemForm">
 	
 	<form:input path="word"/>
 	<input type="submit" value="Buscar">
 	
-</form:form>
+</form:form> 
 
 
 

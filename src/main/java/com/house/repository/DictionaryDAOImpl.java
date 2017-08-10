@@ -130,7 +130,7 @@ public class DictionaryDAOImpl implements DictionaryDAO {
 	public List<Word> getByWord(String word) {
 		List<Word> words = new ArrayList<Word>();
 		// TODO CAMBIAR POR preparedStatement o callableStatement
-		final String SQL = "SELECT id,word,meaning FROM candidatos where word ='" + word + "'";
+		final String SQL = "SELECT id,word,meaning FROM words where word ='" + word + "'";
 		try {
 			words = this.jdbctemplate.query(SQL, new WordMapper());
 		} catch (final EmptyResultDataAccessException e) {

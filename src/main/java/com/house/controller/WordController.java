@@ -36,7 +36,7 @@ public class WordController {
 		final Map<String, Object> model = new HashMap<String, Object>();
 		model.put("words", this.wordManager.getWords());
 		model.put("fecha", new Date().toString());
-
+		model.put("searchItemForm", new SearchItemForm());
 		return new ModelAndView("word/word", model);
 	}
 
@@ -76,9 +76,9 @@ public class WordController {
 		final List<Word> wordsByWord = this.wordManager.getByWord(word);
 
 		model.put("searchItemForm", searchItemForm);
-		model.put("word", wordsByWord);
+		model.put("words", wordsByWord);
 
-		if (wordsByWord.size() == 0) {
+		if (wordsByWord.size() > 0) {
 			existeMsgWord = true;
 			model.put("msgBusqueda", msgBusqueda);
 		}
