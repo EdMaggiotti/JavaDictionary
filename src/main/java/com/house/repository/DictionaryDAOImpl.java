@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -126,6 +124,24 @@ public class DictionaryDAOImpl implements DictionaryDAO {
 		Object[] arguments = { w.getWord(), w.getMeaning(), w.getId() };
 		int affectedRows = this.jdbctemplate.update(SQL, arguments);
 		return (affectedRows == 1) ? true : false;
+	}
+	
+	@Override
+	public List<Word> getByWord(String word) {
+		List<Word> words = new ArrayList<Word>();
+		// TODO CAMBIAR POR preparedStatement o callableStatement
+		final String SQL = "SELECT id,word,meaning FROM candidatos where word ='" + word + "'";
+		try {
+			words = this.jdbctemplate.query(SQL, new WordMapper());
+		} catch (final EmptyResultDataAccessException e) {
+			logger.warn("No word= " + word);
+			words = null;
+		} catch (final Exception e) {
+			logger.error(e.getMessage());
+			words = null;
+		}
+
+		return words;
 	}
 
 }

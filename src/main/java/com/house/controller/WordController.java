@@ -3,6 +3,7 @@ package com.house.controller;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.house.domain.Word;
+import com.house.form.SearchItemForm;
 import com.house.service.WordManager;
 
 @Controller
@@ -60,7 +62,32 @@ public class WordController {
 		model.put("isNew", false);
 		return new ModelAndView("word/formulario", model);
 	}
+	
+	// SEARCH
+	@RequestMapping(value = "/dictionary/buscar", method = RequestMethod.GET, params = "word")
+	public ModelAndView buscar(String word) throws ServletException, IOException {
+		this.logger.trace("Mostrando word[" + word + "]....");
 
+		final Map<String, Object> model = new HashMap<String, Object>();
+		final SearchItemForm searchItemForm = new SearchItemForm();
+		final String msgBusqueda = "Word no encontrada";
+		boolean existeMsgWord = false;
+
+		final List<Word> wordsByWord = this.wordManager.getByWord(word);
+
+		model.put("searchItemForm", searchItemForm);
+		model.put("word", wordsByWord);
+
+		if (wordsByWord.size() == 0) {
+			existeMsgWord = true;
+			model.put("msgBusqueda", msgBusqueda);
+		}
+		model.put("existeMsgWord", existeMsgWord);
+		this.logger.info("Listados words");
+
+		return new ModelAndView("word/word", model);
+	}
+	
 	// SAVE
 	@RequestMapping(value = "/word/save", method = RequestMethod.POST)
 	public ModelAndView salvar(@Valid Word word, BindingResult bindingResult) {

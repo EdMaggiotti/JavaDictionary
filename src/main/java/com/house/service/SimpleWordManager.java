@@ -43,6 +43,12 @@ public class SimpleWordManager implements WordManager{
 	public boolean modificar(Word w) {
 		return this.dictionaryDAO.modificar(w);
 	}
+	
+	@Override
+	public List<Word> getByWord(String word) {
+		return this.dictionaryDAO.getByWord(word);
+	}
+	
 
 }
 
