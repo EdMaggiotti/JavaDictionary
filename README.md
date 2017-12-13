@@ -7,6 +7,9 @@ The IDE that I used is Eclipse.
 
 For the database I used XAMPP and HeidiSQL.
 
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
 TODO front-end of the aplication.
 
 TODO searchWord function.
