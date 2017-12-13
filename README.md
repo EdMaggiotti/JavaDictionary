@@ -1,6 +1,6 @@
 # JavaDictionary
 
-This application is based in examples of my course of Java Intermediate.
+This application is created with examples of my course of Java Intermediate.
 
 Simple English-Spanish Dictionary created with Java using Maven, Hibernate and Spring tools.
 
